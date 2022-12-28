@@ -66,5 +66,7 @@ const pdfQueue = new Queue('pdf transcoding');
 // });
 
 videoQueue.add({ video: 'http://example.com/video1.mov' });
-audioQueue.add({ audio: 'http://example.com/audio1.mp3' });
-imageQueue.add({ image: 'http://example.com/image1.tiff' });
+// audioQueue.add({ audio: 'http://example.com/audio1.mp3' });
+// imageQueue.add({ image: 'http://example.com/image1.tiff' });
+
+// process.exit(0);
