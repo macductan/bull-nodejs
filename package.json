@@ -1,0 +1,23 @@
+{
+  "name": "bull-nodejs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/macductan/bull-nodejs.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/macductan/bull-nodejs/issues"
+  },
+  "homepage": "https://github.com/macductan/bull-nodejs#readme",
+  "dependencies": {
+    "bluebird": "^3.7.2",
+    "ioredis": "^5.2.4"
+  }
+}
