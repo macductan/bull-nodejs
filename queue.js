@@ -7,12 +7,13 @@ class Queue {
         this.nameQueue = nameQueue
     }
 
-    async push(list) {
-        for (let i = 0; i < list.length; ++i) {
-            const index = await redis.get(this.nameQueue + ':#index').then(res => +res)
+    async push(value) {
+        const index = await redis.get(this.nameQueue + ':#index').then(res => +res)
+        await redis.set(this.nameQueue + ':#index', index + 1)
+
+        for (let i = 0; i < value.length; ++i) {
             await Bluebird.all([
-                redis.set(this.nameQueue + ':#index', index + 1),
-                redis.set(this.nameQueue + ':' + index, JSON.stringify(list[i])),
+                redis.set(this.nameQueue + ':' + index, JSON.stringify(value[i])),
                 redis.rpush(this.nameQueue + ':#wait', index),
             ])
         }
