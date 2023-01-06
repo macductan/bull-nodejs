@@ -11,9 +11,9 @@ class Queue {
         for (let i = 0; i < list.length; ++i) {
             const index = await redis.get(this.nameQueue + ':#index').then(res => +res)
             await Bluebird.all([
+                redis.set(this.nameQueue + ':#index', index + 1),
                 redis.set(this.nameQueue + ':' + index, JSON.stringify(list[i])),
                 redis.rpush(this.nameQueue + ':#wait', index),
-                redis.set(this.nameQueue + ':#index', index + 1)
             ])
         }
     }
@@ -24,8 +24,7 @@ class Queue {
                 throw new Error('Handle must be a function')
             }
 
-            const index = await redis.blpop(this.nameQueue + ':#wait', 1)
-                .then(index => index && index[1])
+            const index = await redis.blpop(this.nameQueue + ':#wait', 1).then(index => index && index[1])
             const job = JSON.parse(await redis.get(this.nameQueue + ':' + index))
             if (index) {
                 try {
